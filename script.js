@@ -350,7 +350,7 @@ function updateFavoriteButton(verse) {
     favoriteBtn.title = "Remover dos favoritos";
   } else {
     favoriteBtn.classList.remove("favorited");
-    favoriteBtn.title = "Adicionar aos favoritos";
+    favoriteBtn.title = "Salvar versículo";
   }
 }
 
@@ -441,13 +441,76 @@ function shareVerse() {
   }
 }
 
+// Saudação do dia
+function updateGreeting() {
+  const hour = new Date().getHours();
+  let greeting = "BOA NOITE";
+  
+  if (hour >= 5 && hour < 12) {
+    greeting = "BOM DIA";
+  } else if (hour >= 12 && hour < 18) {
+    greeting = "BOA TARDE";
+  }
+  
+  document.getElementById("greeting").textContent = greeting;
+}
+
+// Atualizar data
+function updateDate() {
+  const date = new Date();
+  const options = { 
+    weekday: 'long', 
+    year: 'numeric', 
+    month: 'long', 
+    day: 'numeric' 
+  };
+  const formattedDate = date.toLocaleDateString('pt-BR', options);
+  document.getElementById("date").textContent = formattedDate;
+}
+
+// Copiar versículo
+function copyVerse() {
+  const verseElement = document.getElementById("verse");
+  const referenceElement = document.getElementById("reference");
+  
+  const text = `${verseElement.textContent}\n${referenceElement.textContent}`;
+  
+  navigator.clipboard.writeText(text).then(() => {
+    // Feedback visual
+    const copyBtn = document.getElementById("copyBtn");
+    const originalText = copyBtn.querySelector(".action-text").textContent;
+    copyBtn.querySelector(".action-text").textContent = "Copiado!";
+    setTimeout(() => {
+      copyBtn.querySelector(".action-text").textContent = originalText;
+    }, 2000);
+  }).catch(err => {
+    // Fallback mais antigo
+    const textArea = document.createElement("textarea");
+    textArea.value = text;
+    document.body.appendChild(textArea);
+    textArea.select();
+    document.execCommand("copy");
+    document.body.removeChild(textArea);
+    
+    const copyBtn = document.getElementById("copyBtn");
+    const originalText = copyBtn.querySelector(".action-text").textContent;
+    copyBtn.querySelector(".action-text").textContent = "Copiado!";
+    setTimeout(() => {
+      copyBtn.querySelector(".action-text").textContent = originalText;
+    }, 2000);
+  });
+}
+
 // Event listeners
 document.addEventListener("DOMContentLoaded", () => {
+  updateGreeting();
+  updateDate();
   loadFavorites();
   showRandomVerse(false); // Mostrar versículo ao carregar (sem fade out)
   
   document.getElementById("newVerseBtn").addEventListener("click", () => showRandomVerse(true));
   document.getElementById("shareBtn").addEventListener("click", shareVerse);
   document.getElementById("favoriteBtn").addEventListener("click", toggleFavorite);
+  document.getElementById("copyBtn").addEventListener("click", copyVerse);
 });
 

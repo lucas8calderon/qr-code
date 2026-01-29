@@ -4,37 +4,60 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Receba uma mensagem de fé através de um versículo bíblico aleatório">
-  <title>Mensagem de Fé</title>
+  <title>Versículo do Dia</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="container">
-    <div class="card">
-      <div class="icon">📖</div>
-      <h1>Mensagem para você</h1>
+    <header class="header">
+      <div class="greeting" id="greeting">BOA NOITE</div>
+      <h1>Versículo do Dia</h1>
+      <button id="newVerseBtn" class="refresh-btn" title="Atualizar versículo">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M23 4v6h-6M1 20v-6h6M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/>
+        </svg>
+      </button>
+    </header>
+
+    <div class="verse-card">
+      <div class="card-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <path d="M12 1v6M12 17v6M23 12h-6M7 12H1"/>
+        </svg>
+      </div>
       
-      <div class="verse-container">
+      <div class="verse-content">
+        <div class="quote-marks">"</div>
         <p id="verse" class="verse-text"></p>
+        <div class="divider"></div>
         <span id="reference" class="reference"></span>
       </div>
 
-      <button id="newVerseBtn" class="btn btn-primary">
-        🔄 Gerar outro versículo
-      </button>
-      
-      <div class="secondary-actions">
-        <button id="shareBtn" class="btn btn-secondary">
-          📤 Compartilhar
+      <div class="verse-actions">
+        <button id="favoriteBtn" class="action-btn" title="Salvar">
+          <span class="action-icon">❤️</span>
+          <span class="action-text">Salvar</span>
         </button>
-        <button id="favoriteBtn" class="btn btn-icon" title="Favoritar">
-          ❤️
+        <button id="shareBtn" class="action-btn" title="Compartilhar">
+          <span class="action-icon">📤</span>
+          <span class="action-text">Compartilhar</span>
+        </button>
+        <button id="copyBtn" class="action-btn" title="Copiar">
+          <span class="action-icon">📋</span>
+          <span class="action-text">Copiar</span>
         </button>
       </div>
-
-      <div id="favoritesList" class="favorites-list"></div>
-      
-      <p class="emotional-message">Que essa mensagem leve paz ao seu dia.</p>
     </div>
+
+    <div class="date" id="date"></div>
+
+    <div class="footer-verse">
+      <p>"Lâmpada para os meus pés é a tua palavra, e luz para o meu caminho."</p>
+      <span class="footer-reference">Salmos 119:105</span>
+    </div>
+
+    <div id="favoritesList" class="favorites-list"></div>
   </div>
 
   <script src="script.js"></script>
