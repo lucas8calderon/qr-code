@@ -473,15 +473,22 @@ function copyVerse() {
   const verseElement = document.getElementById("verse");
   const referenceElement = document.getElementById("reference");
   
-  const text = `${verseElement.textContent}\n${referenceElement.textContent}`;
+  // Formatar texto para compartilhamento
+  const text = `${verseElement.textContent}\n\n${referenceElement.textContent}`;
   
   navigator.clipboard.writeText(text).then(() => {
     // Feedback visual
     const copyBtn = document.getElementById("copyBtn");
-    const originalText = copyBtn.querySelector(".action-text").textContent;
-    copyBtn.querySelector(".action-text").textContent = "Copiado!";
+    const actionText = copyBtn.querySelector(".action-text");
+    const originalText = actionText.textContent;
+    
+    // Mudar texto e adicionar classe de sucesso
+    actionText.textContent = "Copiado!";
+    copyBtn.classList.add("copied");
+    
     setTimeout(() => {
-      copyBtn.querySelector(".action-text").textContent = originalText;
+      actionText.textContent = originalText;
+      copyBtn.classList.remove("copied");
     }, 2000);
   }).catch(err => {
     // Fallback mais antigo
@@ -492,11 +499,17 @@ function copyVerse() {
     document.execCommand("copy");
     document.body.removeChild(textArea);
     
+    // Feedback visual
     const copyBtn = document.getElementById("copyBtn");
-    const originalText = copyBtn.querySelector(".action-text").textContent;
-    copyBtn.querySelector(".action-text").textContent = "Copiado!";
+    const actionText = copyBtn.querySelector(".action-text");
+    const originalText = actionText.textContent;
+    
+    actionText.textContent = "Copiado!";
+    copyBtn.classList.add("copied");
+    
     setTimeout(() => {
-      copyBtn.querySelector(".action-text").textContent = originalText;
+      actionText.textContent = originalText;
+      copyBtn.classList.remove("copied");
     }, 2000);
   });
 }

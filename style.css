@@ -176,6 +176,15 @@ h1 {
 .action-icon {
   font-size: 20px;
   margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-icon svg {
+  width: 20px;
+  height: 20px;
+  color: #8b7355;
 }
 
 .action-text {
@@ -183,8 +192,28 @@ h1 {
   font-weight: 400;
 }
 
-.action-btn.favorited .action-icon {
+.action-btn.favorited .action-icon svg {
+  fill: #ff8c42;
+  stroke: #ff8c42;
   filter: drop-shadow(0 0 4px rgba(255, 140, 66, 0.5));
+}
+
+.action-btn.favorited .action-text {
+  color: #ff8c42;
+  font-weight: 600;
+}
+
+.action-btn.copied {
+  color: #ff8c42;
+}
+
+.action-btn.copied .action-icon svg {
+  color: #ff8c42;
+}
+
+.action-btn.copied .action-text {
+  color: #ff8c42;
+  font-weight: 600;
 }
 
 /* Date */
